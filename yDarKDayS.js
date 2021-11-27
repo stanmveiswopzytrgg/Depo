@@ -1,38 +1,38 @@
 //Bu Altyapı iSwopzy Tarafından Yapılmıştır
-//Ve Altyapının değiştirilip izinsiz çalınması durumunda gerekli işlemler yapılacaktır
-const discord = require("discord.js");
-const fs = require("fs");
-const http = require("http");
-const db = require("quick.db");
-const moment = require("moment");
-const express = require("express");
-const Discord = require("discord.js")
-const fetch = require('node-fetch');
-const app = express();
-const client = new Discord.Client();
-const prefix = 'dd!' //PREFİXİNİZİ GİRİNİZ.
+//Ve Altyapının değiştirilip izinsiz olması durumunda birkaç çeşit eski tip
+const  uyumsuzluk  =  zorunlu ( "discord.js" ) ;
+const  fs  =  gerektirir ( "fs" ) ;
+const  http  =  gerektirir ( "http" ) ;
+const  db  =  zorunlu ( "quick.db" ) ;
+const  moment  =  gerektirir ( "moment" ) ;
+const  ifade  =  gerektirir ( "ekspres" ) ;
+const  Discord  =  gerektirir ( "discord.js" )
+const  getirme  =  zorunlu ( 'düğüm getirme' ) ;
+const  uygulama  =  ekspres ( ) ;
+const  istemci  =  yeni  Discord . Müşteri ( ) ;
+const  öneki  =  'dd!'  //PREFİXİNİZİ GİRİNİZ.
 
-client.on("ready", async () => {
-client.user.setActivity(`+yardım`, { type: "PLAYING" });
-  console.log("`");
-});
+istemci . on ( "hazır" , zaman  uyumsuz  ( )  =>  {
+istemci . kullanıcı . setActivity ( `+yardım` ,  {  type : "PLAYING"  } ) ;
+  konsol . günlük ( "`" ) ;
+} ) ;
 
-setInterval(() => {
-const Linkler = db.get('Linkler')
-if(!Linkler) return;
-const De = Linkler.map(Revenge => Revenge.url)
-De.forEach(Link => {
-try {
-fetch(Link)
-} catch(e) {
-console.error(e)
+setInterval ( ( )  =>  {
+const  Linkler  =  db . al ( 'Linkler' )
+eğer ( ! Linkler )  dönerse ;
+const  De  =  Linkler . map ( İntikam  =>  Revenge . url )
+de . forEach ( Bağlantı  =>  {
+denemek  {
+getir ( bağlantı )
+}  yakalamak ( e )  {
+konsol . hata ( e )
 }
-})
-console.log(`${client.user.username} | ${db.get('Proje') || 1} Proje Hostandı`)
-}, 60000)
+} )
+konsol . log ( ` ${ müşteri . kullanıcı . kullanıcı adı } | ${ db . get ( 'Proje' )  ||  1 } Proje Hostandı` )
+} ,  60000 )
 
-client.on('ready', () => {
-console.log(`${client.user.username} Aktif!`)
+istemci . açık ( 'hazır' ,  ( )  =>  {
+konsol . log ( ` ${ client . user . username } Aktif!` )
 if(!Array.isArray(db.get('Linkler'))) {
 db.set('Linkler', [])
 }
@@ -41,148 +41,141 @@ client.on('message', async message => {
   if(message.author.bot) return;
   var Split = message.content.split(' ')
 
-  if(Split[0] == prefix+'ekle') {
-  var Link = Split[1]
-  fetch(Link).then(() => {
-    const Revenge = new Discord.MessageEmbed()
-    .setColor('#FF0000')
-    .setDescription(`
+  if ( Böl [ 0 ]  ==  önek + 'ekle' )  {
+  var  Bağlantı  =  Böl [ 1 ]
+  getir ( bağlantı ) . sonra ( ( )  =>  {
+    const  İntikam  =  yeni  Anlaşmazlık . MessageEmbed ( )
+    . setColor ( '#FF0000' )
+    . setDescription ( `
     
    ❎ **Proje Sistemimizde Zaten Bulunuyor ** 
-
-    `)
-    .setTimestamp()
+    ` )
+    . setZaman damgası ( )
     .setThumbnail(message.author.avatarURL)
     if(db.get('Linkler').map(Revenge => Revenge.url).includes(Link)) return message.channel.send(Revenge)
     const success = new Discord.MessageEmbed()
     .setColor('GREEN')
     .setThumbnail(message.author.avatarURL)
-    .setDescription(`
+    . setDescription ( `
     
     **✅ Yazdığınız Proje Başarıyla Uptime Sistemimize Eklendi.**
-    `)
-    .addField('```dd!linkler```','Komutunu Kullanarak Ekledigin Linkleri Görebilirsin!')//yDarKDayS
-    .setTimestamp()
-    message.channel.send(success)
-    db.push('Linkler', { url: Link, owner: message.author.id, owner2: message.author.tag})
-    db.add(`Sahiplik_${message.author.id}`,1)
-    db.push(`Projesi_${message.author.id}`,Link)
-    db.add(`Proje`,1)
-  }).catch(Hata => {
-  const dijitaluptime = new Discord.MessageEmbed()
-  .setColor('#FF0000')
-  .setDescription(`
-
-  **❎ Hey Uptime Edeceğim URL Girmelisin! **
-
+    ` )
+    . addField ( ''```dd!linkler```' , 'Komutunu Kullanarak Linkleri Görebilirsin!' ) //yDarKDayS
+    . setZaman damgası ( )
+    mesaj . kanal . göndermek ( başarılı )
+    db . push ( 'Linkler' ,  {  url : Bağlantı ,  sahip : mesaj . yazar . id ,  sahip2 : mesaj . yazar . etiket } )
+    db . add ( `Sahiplik_ ${ mesaj . yazar . id } ` , 1 )
+    db . push ( `Projesi_ ${ mesaj . yazar . id } ` , Bağlantı )
+    db . ekle ( `Proje` , 1 )
+  } ) . yakalamak ( Hata  =>  {
+  const  dijitaluptime  =  new  Discord . MessageEmbed ( )
+  . setColor ( '#FF0000' )
+  . setDescription ( `
+  **❎ Hey Uptime URL Girmelisin Edeceğim! **
 > dd!ekle (Glitch Show Linki)
-  `)
-.setImage("https://media.discordapp.net/attachments/833584110483013642/906501816013959218/unknown.png?width=177&height=247")
-  .setThumbnail(message.author.avatarURL)
-  message.channel.send(dijitaluptime)
-  })
+  ` )
+. setImage ( "https://media.discordapp.net/attachments/833584110483013642/906501816013959218/unknown.png?width=177&height=247" )
+  . setThumbnail ( mesaj . yazar . avatarURL )
+  mesaj . kanal . gönder ( dijitaluptime )
+  } )
   }
 
-//Bu Altyapı yDarKDayS Tarafından Yapılmıştır
-//Ve Altyapının değiştirilip izinsiz çalınması durumunda gerekli işlemler yapılacaktır
+//Bu AltyapıyDarKDayS Yapılmıştır
+//Ve Altyapının değiştirilip izinsiz olması durumunda birkaç çeşit eski tip
 
 
 
-  if(Split[0] == prefix+'say') {
-  const say = new Discord.MessageEmbed()
-  .setColor('RANDOM')
-  .setThumbnail(message.author.avatarURL)
-  .setDescription(`
+  if ( Böl [ 0 ]  ==  önek + 'say' )  {
+  const  say  =  yeni  Anlaşmazlık . MessageEmbed ( )
+  . setColor ( 'RANDOM' )
+  . setThumbnail ( mesaj . yazar . avatarURL )
+  . setDescription ( `
   
-☀️ ** Şuanda  \`${db.get('Proje')}\` URL'yi 7/24 Aktif Tutuyor. **
-
-☀️ **  Bu Linklerden Sadece \`${db.fetch(`Sahiplik_${message.author.id}`) || null}\` Tane Senin URl'ni Uptime ediyor!**
-`)
-  message.channel.send(say)
+☀️ ** Şimdida \` ${ db . get ( 'Proje' ) } \` URL'yi 7/24 Aktif Tutuyor. **
+☀️ ** Bu Linklerden Sadece \` ${ db . getirme ( `Sahiplik_ ${ mesaj . yazar . id } ` )  ||  null } \` Tane Senin URl'ni Uptime ediyor!**
+` )
+  mesaj . kanal . göndermek ( söylemek )
   }
 
-  if(Split[0] == prefix+'uptime') {
-  const pxd = new Discord.MessageEmbed()
-  .setColor('GREEN')
-  .setThumbnail(message.author.avatarURL)
-  .setTimestamp()
+  if ( Böl [ 0 ]  ==  önek + 'çalışma süresi' )  {
+  const  pxd  =  new  ikilik var . MessageEmbed ( )
+  . setColor ( 'YEŞİL' )
+  . setThumbnail ( mesaj . yazar . avatarURL )
+  . setZaman damgası ( )
   
-  .setDescription(`
-
-
-`)
-  .addField('** yDarKDayS Uptime **',`
-- **dd!ekle (glitch show linki)** = Botunuzu 7/24 Aktif Tutar.
+  . setDescription ( `
+` )
+  . addField ( '** yDarKDayS Çalışma Süresi **' , `
+- **dd!ekle (glitch show link)** = Botunuzu 7/24 Aktif Tutar.
 - **dd!linkler** = 7/24 Tuttuğum linklerini gösterir.
-- **dd!say** = Tüm Uptime edilmiş bot sayısını gösterir.
-`)
-  .addField('------------------------------------------------------',`
+- **dd!say** = Tüm Çalışma Süresi botu içerir.
+` )
+  . addField ( '---------------------------------------------------------- -------' , `
 [Destek Sunucu](https://discord.gg/tDpq2SAEF4)
-[Botu Davet Et](https://discord.com/oauth2/authorize?client_id=767317246119903243&scope=bot&permissions=805314622)`)
-  message.channel.send(pxd)
+[Botu Davet Et](https://discord.com/oauth2/authorize?client_id=767317246119903243&scope=bot&permissions=805314622)` )
+  mesaj . kanal . gönder ( pxd )
   }
 
-    if(Split[0] == prefix+'linkler') {
-    const Linkleri = db.fetch(`Projesi_${message.author.id}`)
-    if (!db.get('Linkler').map(Revenge => Revenge.owner).includes(message.author.id)) return message.channel.send(new Discord.MessageEmbed().setColor('GREEN').setDescription(`\<a:driphearts:906521077541371925> **Hiç link eklememişsin. Üzdün Beni Dostum Link Eklemek İçin \`${prefix}ekle\` yazman yeterli**`))
-    message.channel.send(new Discord.MessageEmbed().setColor('GREEN').setDescription(`- **7/24 Aktfi Tuttuğum botlarınızın linklerini daha güvenli olduğunda DM üzerinden gönderdim ${message.author}**`).setThumbnail(message.author.avatarURL))
-    message.author.send(new Discord.MessageEmbed().setColor('#F39de8').setDescription(`- ** Uptime Ettigin Linklerin:** \n\n\``+Linkleri.join('\n')+`\`
-
- [Destek Sunucu](https://discord.gg/tDpq2SAEF4)`).setThumbnail(message.author.avatarURL))
+    if ( Böl [ 0 ]  ==  önek + 'bağlayıcı' )  {
+    const  Linkleri  =  db . getirme ( `Projesi_ ${ mesaj . yazar . id } ` )
+    eğer  ( ! db . get ( 'Linkler' ) . map ( İntikam  =>  Revenge . sahibidir ) . içermektedir ( mesaj . yazar . id ) )  return  mesajı . kanal . gönder ( yeni  Discord . MessageEmbed ( ) . setColor ( 'YEŞİL' ) . setDescription (`\<a:driphearts:906521077541371925> **Hiç link eklememişsin. Üzdün Beni Dostum Link Eklemek İçin \` ${ önek } ekle\` yazman**` ) )
+    mesaj . kanal . send ( yeni  Discord . MessageEmbed ( ) . setColor ( 'YEŞİL' ) . setDescription ( `- **7/24 Aktfi Tuttuğum botlarınızın bağlantılarını daha güvenli DM üzerinden gönderildim ${ mesaj . yazar } **` ) . setThumbnail ( mesaj . yazar . avatarURL ) )
+    mesaj . yazar . send ( yeni  Discord . MessageEmbed ( ) . setColor ( '#F39de8' ) . setDescription ( `- ** Uptime Ettigin Linklerin :** \n\n\`` + Linkleri . join ( '\n' ) + `\`
+[Destek Sunucu](https://discord.gg/tDpq2SAEF4)` ) . setThumbnail ( mesaj . yazar . avatarURL ) )
     }
 
 
    //iSwopzy
-})
+} )
 
 
 
 
-client.on('ready', () => {
-client.user.setActivity(`+ekle (Kısa Link)`, { type: 'PLAYING' })
-client.user.setStatus('online')
+istemci . açık ( 'hazır' ,  ( )  =>  {
+istemci . kullanıcı . setActivity ( `+ekle (Kısa Link)` ,  {  type : 'PLAYING'  } )
+istemci . kullanıcı . setStatus ( 'çevrimiçi' )
   
-  //client.user.setStatus('online') -> çevrimiçi -> PARADOX DEVELOPMENT
-  //client.user.setStatus('dnd') -> rahatsız etmeyin -> PARADOX DEVELOPMENT
-})
+  //client.user.setStatus('online') -> esas -> PARADOX GELİŞTİRME
+  //client.user.setStatus('dnd') -> hiç olmadı -> PARADOX DEVELOPMENT
+} )
 
-client.on("message", async message => {
+istemci . on ( "message" , zaman  uyumsuz  mesaj  =>  {
 
   if(!message.content.startsWith("eval")) return;
   if(!["509417115439071233"].includes(message.author.id)) return;
   var args = message.content.split("eval")[1]
-  if(!args) return message.channel.send(":x: ..")
+  if ( ! args )  mesajı döndürür  . kanal . gönder ( ":x: .." )
   
-      const code = args
+      const  kodu  =  argümanlar
     
     
-      function clean(text) {
-          if (typeof text !== 'string')
-              text = require('util').inspect(text, { depth: 3 })
-          text = text
-              .replace(/`/g, '`' + String.fromCharCode(8203))
-              .replace(/@/g, '@' + String.fromCharCode(8203))
-          return text;
-      };
+      işlev  temizleme ( metin )  {
+          if  ( typeof  text  !==  'string' )
+              metin  =  gerektirir ( 'util' ) . incelemek ( metin ,  {  derinlik : 3  } )
+          metin  =  metin
+              . değiştir ( / ` / g ,  '' '  +  String . fromCharCode ( 8203 ) )
+              . değiştir ( / @ / g ,  '@'  +  Dize . fromCharCode ( 8203 ) )
+          dönüş  metni ;
+      } ;
   
-      var evalEmbed = ""
-      try {
-          var evaled = await clean(await eval(await code));
-          if (evaled.constructor.name === 'Promise') evalEmbed = `\`\`\`\n${evaled}\n\`\`\``
-          else evalEmbed = `\`\`\`js\n${evaled}\n\`\`\``
+      var  evalEmbed  =  ""
+      denemek  {
+          var  evaled  =  bekliyor  temiz ( bekliyoruz  eval ( bekliyoruz  kodu ) ) ;
+          if  ( evaled . yapıcı . name  ===  'Söz' )  evalEmbed  =  `\`\`\`\n ${ değerlendirildi } \n\`\`\``
+          başka  evalEmbed  =  `\`\`\`js\n ${ değerlendirildi } \n\`\`\``
           
-  if(evaled.length < 1900) { 
-     message.channel.send(`\`\`\`js\n${evaled}\`\`\``);
-  } else {
-    var hast = await require("hastebin-gen")(evaled, { url: "https://hasteb.in" } )
-  message.channel.send(hast)
+  if ( değerlendirildi . uzunluk  <  1900 )  { 
+     mesaj . kanal . gönder ( `\`\`\`js\n ${ değerlendirildi } \`\`\`` ) ;
+  }  başka  {
+    var  hast  =  bekliyorum  gerekli ( "hastebin-gen" ) ( değerlendirildi ,  {  url : "https://hasteb.in"  }  )
+  mesaj . kanal . göndermek ( hast )
   }
-      } catch (err) {
-          message.channel.send(`\`\`\`js\n${err}\n\`\`\``);
+      }  yakalamak  ( hata )  {
+          mesaj . kanal . gönder ( `\`\`\`js\n ${ hata } \n\`\`\`` ) ;
       }
-  })
+  } )
 
-const Log = message => {
+const  Günlük  =  mesaj  =>  {
 console.log(`${message}`)
 }
 
@@ -201,8 +194,8 @@ Lütfen spam ATMAYINIZ`  )
   }
 })
 
-//tokenininizi giriniz.
-client.login(process.env.token);
+//tokeninizi giriniz.
+istemci . oturum açma ( işlem . env . belirteci ) ;
 
 
 
