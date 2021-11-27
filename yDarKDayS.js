@@ -1,4 +1,4 @@
-//Bu Altyapı yDarKDayS Tarafından Yapılmıştır
+//Bu Altyapı iSwopzy Tarafından Yapılmıştır
 //Ve Altyapının değiştirilip izinsiz çalınması durumunda gerekli işlemler yapılacaktır
 const discord = require("discord.js");
 const fs = require("fs");
@@ -132,7 +132,7 @@ client.on('message', async message => {
     }
 
 
-   //yDarKDayS
+   //iSwopzy
 })
 
 
@@ -207,4 +207,4 @@ client.login(process.env.token);
 
 
 
-//yDarKDayS
+//iSwopzy
