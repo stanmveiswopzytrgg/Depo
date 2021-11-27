@@ -1,8 +1,7 @@
-# Bu Altyapı yDarKDayS Tarafından Yapılmıştır
+# Bu Altyapı iSwopzy Tarafından Yapılmıştır
 
 **Ve Altyapının değiştirilip izinsiz çalınması durumunda gerekli işlemler yapılacaktır**
 
-Lütfen bu alt yapıyı izinsiz paylaşmayınız DETAYLI BILGI : https://discord.gg/tDpq2SAEF4
+Lütfen bu alt yapıyı izinsiz paylaşmayınız DETAYLI BILGI : https://discord.gg/BSdGWDsm9E
 
-[DİSCORD](https://discord.gg/tDpq2SAEF4) ||
-[YOUTUBE](https://www.youtube.com/c/yDarKDayS)
+[DİSCORD](https://discord.gg/BSdGWDsm9E)
